@@ -34,7 +34,11 @@ export const TaskItem = (props: Todo) => {
         setMode(false)
     }
 
-    const showEditBlock = () => {
+    const showEditBlockDesktop = () => {
+        setVisibility('task-item__edit-block visible')
+    }
+
+    const showEditBlockMobile = () => {
         setVisibility('task-item__edit-block visible')
     }
 
@@ -49,7 +53,9 @@ export const TaskItem = (props: Todo) => {
     return (
         <div className="task-item">
             {!editMode ? 
-            <div className="task-item__regular-mode" onMouseEnter={showEditBlock} onMouseLeave={hideEditBlock}>
+            <div className="task-item__regular-mode" onTouchStart={showEditBlockMobile} 
+                                                     onMouseEnter={showEditBlockDesktop}                                                     
+                                                     onMouseLeave={hideEditBlock}>
                 <div className="task-item__status"><img src={props.isCompleted ? done : inProgress} alt="task status" /></div>
                 <div className="task-item__main">
                     <div className="task-item__main-urgency">Urgency: {props.urgency}</div>
@@ -92,7 +98,7 @@ export const TaskItem = (props: Todo) => {
                         <option value="5">5</option>
                     </select>
                     <input className="task-item__edit-form--text" defaultValue={props.text} onChange={onChangeText} />
-                    <button type="submit">Confirm changes</button>
+                    <button type="submit">OK</button>
                 </form>
             </div>
             }

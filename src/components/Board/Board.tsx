@@ -14,20 +14,7 @@ export const Board = () => {
   const [order, setOrder] = useState('')
   const [tasks, setTasks] = useState(useAppSelector(state => state.taskList))
 
-  let a = useAppSelector(state => state.taskList)
-
-  //let tasks = useAppSelector(state => state.taskList)
-
-/*   const mappedTasks = (todos: Array<Todo>) => {
-    console.log(todos)
-    todos.map((task: Todo): JSX.Element => {
-      return (
-        <TaskItem key={task.id} id={task.id} 
-        text={task.text} isCompleted={task.isCompleted} urgency={task.urgency}
-        created={task.created} updated={task.updated} />
-      )}
-    )
-  }  */
+  let taskList = useAppSelector(state => state.taskList)
 
   const mappedTasks = tasks.map((task: Todo) => {
     //console.log('a')
@@ -59,14 +46,29 @@ export const Board = () => {
         }))
         //console.log(tasks)
         break
+
+      case 'later_created_first':
+        setOrder(e.target.value)
+        setTasks([...tasks].sort(function(a,b) {
+          return +Date.parse(a.created!) - +Date.parse(b.created!)
+        }))
+        //console.log(tasks)
+        break
+
+      case 'earlier_created_first':
+        setOrder(e.target.value)
+        setTasks([...tasks].sort(function(a,b) {
+          return +Date.parse(b.created!) - +Date.parse(a.created!)
+        }))
+        break
     }
     
   }
 
   useEffect(() => {
-    setTasks(a)
+    setTasks(taskList)
     //console.log(tasks)
-  }, [a])
+  }, [taskList])
 
     useEffect(() => {
     setTasks(tasks)
@@ -82,6 +84,8 @@ export const Board = () => {
         <label className="board__filter-select">
           Sort By:&nbsp;
           <select onChange={onChangeFilter}>
+            <option value="later_created_first">Later created first</option>
+            <option value="earlier_created_first">Earlier created first</option>
             <option value="more_important_first">More important first</option>
             <option value="less_important_first">Less important first</option>
           </select>

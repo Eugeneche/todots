@@ -1,9 +1,13 @@
 body {
   background: linear-gradient(#e66465, #9198e5);
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
-html, button, input, select {
-  font-family: 'IBM Plex Sans', sans-serif;
+input,
+button,
+textarea,
+select {
+  font: inherit;
 }
 
 button {
@@ -15,10 +19,15 @@ button[type="submit"] {
   background: linear-gradient(#76D7C4, #1ABC9C);
   border-radius: 3px;
   color: #FFF;
+  margin-right: 1%;
+}
+
+input[type="checkbox" i] {
+  position: relative;
+  top: 2px;
 }
 
 select {
-  font-family: 'IBM Plex Sans', sans-serif;
   background: none;
   border: none;
   outline: none;
@@ -165,7 +174,7 @@ select {
 .modal__form {
   margin: 20vh auto;
   max-width: 500px;
-  height: 250px;
+  min-height: 250px;
   background: #ffffff;
   border: 1px solid #008000;
   border-radius: 5px;
@@ -185,4 +194,103 @@ select {
 .modal__buttons {
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: 25px;
+}
+
+/* mobile version - reset styles! */
+
+@media screen and (max-width: 650px) {
+
+  .board__header {
+    flex-wrap: wrap;
+}
+
+  .board__title {
+    order: 1;
+    margin: 10px 10% 0 5%;
+  }
+
+  .board__add-btn {
+    order: 2;
+  }
+  
+  .board__filter-select {
+    order: 3;
+    margin: -18px 5%;
+    flex-grow: 1;
+    line-height: 0;
+  }
+
+  .modal__form {
+    max-width: 450px;
+    width: 85%;
+  }
+
+  .task-item {
+    width: 95%;
+    margin: 20px auto;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #808080;
+    border-radius: 5px;
+  }
+
+  .task-item__edit-block {
+    position: absolute;
+    right: 5%
+  }
+
+  .task-item__main {
+    max-width: 98%;
+  }
+
+  button[type="submit"] {
+    margin-right: 2%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+/*   .task-item__edit-mode .task-item__status {
+    order: 1;
+  } */
+  .task-item__edit-form {
+    display: block;
+  }
+
+  .task-item__edit-form--text {
+    width: 95%;
+  }
+
+  .task-item__edit-form--checkbox {
+    display: inline-block;
+    margin: 9px;
+  }
+
+  .task-item__edit-mode select {
+    display: inline-block;
+    margin: 9px;
+}
+
+  .task-item__edit-mode button[type="submit"] {
+    position: relative;
+    right: -80%;
+    margin: 8px 0;
+  }
+}
+
+@media screen and (max-width: 370px) {
+
+  .board__title {
+    font-size: 25px;
+  }
+
+  .board__filter-select {
+    margin: -22px 5%;
+    font-size: 14px;
+  }
+
+  .modal__form {
+    max-width: 450px;
+    width: 85%;
+  }
 }
